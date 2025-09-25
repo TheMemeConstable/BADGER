@@ -232,6 +232,7 @@ header {
     pointer-events: none;
     z-index: 15;
     animation: hitAnimation 0.5s ease-out;
+    user-select: none;
 }
 
 .game-controls {

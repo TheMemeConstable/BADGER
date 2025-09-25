@@ -231,7 +231,11 @@ class BadgerGame {
         this.hitIndicator.style.top = (bearRect.top - gameAreaRect.top - 30) + 'px';
         this.hitIndicator.style.opacity = '1';
         this.hitIndicator.style.animation = 'hitAnimation 0.5s ease-out';
-        
+        this.hitIndicator.style.userSelect = 'none';
+        this.hitIndicator.style.pointerEvents = 'none';
+        if (this.hitIndicator.setAttribute) {
+            this.hitIndicator.setAttribute('unselectable', 'on');
+        }
         setTimeout(() => {
             this.hitIndicator.style.opacity = '0';
             this.hitIndicator.style.animation = '';
@@ -277,24 +281,21 @@ class BadgerGame {
     }
     
     playHitSound() {
-        // Create a simple beep sound
-        if (window.AudioContext || window.webkitAudioContext) {
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
-            
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
-            
-            oscillator.frequency.value = 800;
-            oscillator.type = 'square';
-            
-            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-            
-            oscillator.start(audioContext.currentTime);
-            oscillator.stop(audioContext.currentTime + 0.1);
+        // Use a single AudioContext for the whole game
+        if (!this._audioContext) {
+            this._audioContext = new (window.AudioContext || window.webkitAudioContext)();
         }
+        const audioContext = this._audioContext;
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        oscillator.frequency.value = 800;
+        oscillator.type = 'square';
+        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.1);
     }
     
     updatePositions() {
