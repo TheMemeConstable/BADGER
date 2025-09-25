@@ -120,15 +120,28 @@ class BadgerGame {
         this.gameState.isRunning = true;
         this.gameState.timeLeft = 60;
         this.gameState.score = 0;
-        
+
         this.startBtn.disabled = true;
         this.startBtn.textContent = 'GAME RUNNING...';
-        
+
+        // Disable page scrolling on mobile
+        document.body.style.overflow = 'hidden';
+        document.documentElement.style.overflow = 'hidden';
+
+        // Center and fit game area
+        this.gameArea.style.position = 'fixed';
+        this.gameArea.style.left = '50%';
+        this.gameArea.style.top = '50%';
+        this.gameArea.style.transform = 'translate(-50%, -50%)';
+        this.gameArea.style.zIndex = '999';
+        this.gameArea.style.maxWidth = '100vw';
+        this.gameArea.style.maxHeight = '100vh';
+
         // Start game loops
         this.gameState.gameInterval = setInterval(() => this.gameLoop(), 1000/60); // 60 FPS
         this.gameState.timerInterval = setInterval(() => this.updateTimer(), 1000);
         this.gameState.bearMoveInterval = setInterval(() => this.moveBearRandomly(), 2000);
-        
+
         this.updateDisplay();
     }
     
@@ -315,6 +328,18 @@ class BadgerGame {
         // Update button
         this.startBtn.disabled = false;
         this.startBtn.textContent = 'START GAME';
+
+        // Re-enable page scrolling and reset game area position
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+        this.gameArea.style.position = '';
+        this.gameArea.style.left = '';
+        this.gameArea.style.top = '';
+        this.gameArea.style.transform = '';
+        this.gameArea.style.zIndex = '';
+        this.gameArea.style.maxWidth = '';
+        this.gameArea.style.maxHeight = '';
+
         // Show score dashboard modal
         this.showScoreModal();
     }
