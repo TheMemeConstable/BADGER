@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Badger Attack Game - $BADGER</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <header class="game-header">
+            <h1>BADGER ATTACK!</h1>
+            <p>Use WASD to move, SPACEBAR to jump. Hit the bear as many times as you can!</p>
+            <div class="game-stats">
+                <span>Score: <span id="score">0</span></span>
+                <span>Time: <span id="timer">60</span>s</span>
+            </div>
+        </header>
+
+        <div class="game-area" id="gameArea">
+            <div class="badger" id="badger">🦡</div>
+            <div class="bear" id="bear">🐻</div>
+            <div class="hit-indicator" id="hitIndicator">WHAM!</div>
+        </div>
+
+        <div class="game-controls">
+            <button id="startBtn" class="game-btn">START GAME</button>
+            <button id="resetBtn" class="game-btn">RESET</button>
+        </div>
+
+        <div class="instructions">
+            <h3>How to Play:</h3>
+            <ul>
+                <li><strong>W</strong> - Move Up</li>
+                <li><strong>A</strong> - Move Left</li>
+                <li><strong>S</strong> - Move Down</li>
+                <li><strong>D</strong> - Move Right</li>
+                <li><strong>SPACEBAR</strong> - Jump (and attack bear if close)</li>
+            </ul>
+            <p>The bear will try to swat you away, but honey badger don't care!</p>
+        </div>
+
+        <div class="navigation">
+            <a href="index.html" class="nav-btn">🏠 Back Home</a>
+            <a href="contact.html" class="nav-btn">📧 Contact</a>
+        </div>
+
+        <!-- Score Dashboard Modal -->
+        <div id="scoreModal" class="modal">
+            <div class="modal-content">
+                <h2 class="modal-title">GAME OVER!</h2>
+                <img src="BADGERPFP.png" alt="Honey Badger" style="width:120px; border-radius:50%; margin-bottom:15px;">
+                <div class="score-stats">
+                    <p><strong>Final Score:</strong> <span id="finalScore">0</span> hits</p>
+                    <p><strong>Time Played:</strong> 1 minute</p>
+                </div>
+                <button id="shareXBtn" class="game-btn" style="margin-bottom:10px;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle; margin-right:8px;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    Share on X
+                </button>
+                <button id="closeScoreModal" class="close-btn">CLOSE</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
