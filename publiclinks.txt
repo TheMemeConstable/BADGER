@@ -1,0 +1,68 @@
+public links
+
+game.html
+
+Direct link (for downloads/playback):
+https://us-west-00-firestarter.pipenetwork.com/publicDownload?hash=ea75b4e1c559866e287d898bf49c21de
+
+Social media link (for sharing):
+https://us-west-00-firestarter.pipenetwork.com/publicDownload?hash=ea75b4e1c559866e287d898bf49c21de&preview=true
+Use `publicDownload?hash=ea75b4e1c559866e287d898bf49c21de` to download the file without auth.
+
+game.js
+
+Direct link (for downloads/playback):
+https://us-west-00-firestarter.pipenetwork.com/publicDownload?hash=1a41de62c901582c1987e16ccb5b7abc
+
+Social media link (for sharing):
+https://us-west-00-firestarter.pipenetwork.com/publicDownload?hash=1a41de62c901582c1987e16ccb5b7abc&preview=true
+Use `publicDownload?hash=1a41de62c901582c1987e16ccb5b7abc` to download the file without auth.
+
+
+contact.js
+
+Direct link (for downloads/playback):
+https://us-west-00-firestarter.pipenetwork.com/publicDownload?hash=86dfb5cf538051d797530c76c41b0548
+
+Social media link (for sharing):
+https://us-west-00-firestarter.pipenetwork.com/publicDownload?hash=86dfb5cf538051d797530c76c41b0548&preview=true
+Use `publicDownload?hash=86dfb5cf538051d797530c76c41b0548` to download the file without auth.
+
+BADGERPFP.png:
+
+Direct link (for downloads/playback):
+https://us-west-00-firestarter.pipenetwork.com/publicDownload?hash=bfd6d9287bb4980afd3f9c96bfc03521
+
+Social media link (for sharing):
+https://us-west-00-firestarter.pipenetwork.com/publicDownload?hash=bfd6d9287bb4980afd3f9c96bfc03521&preview=true
+Use `publicDownload?hash=bfd6d9287bb4980afd3f9c96bfc03521` to download the file without auth.
+
+
+contact.html:
+
+Direct link (for downloads/playback):
+https://us-west-00-firestarter.pipenetwork.com/publicDownload?hash=4feacc85f0a85b53da9c90e60a894f57
+
+Social media link (for sharing):
+https://us-west-00-firestarter.pipenetwork.com/publicDownload?hash=4feacc85f0a85b53da9c90e60a894f57&preview=true
+Use `publicDownload?hash=4feacc85f0a85b53da9c90e60a894f57` to download the file without auth.
+
+
+index.html:
+
+Direct link (for downloads/playback):
+https://us-west-00-firestarter.pipenetwork.com/publicDownload?hash=3eeb15c9249ed2051eade1eca5a3f760
+
+Social media link (for sharing):
+https://us-west-00-firestarter.pipenetwork.com/publicDownload?hash=3eeb15c9249ed2051eade1eca5a3f760&preview=true
+Use `publicDownload?hash=3eeb15c9249ed2051eade1eca5a3f760` to download the file without auth.
+
+
+styles.css:
+
+Direct link (for downloads/playback):
+https://us-west-00-firestarter.pipenetwork.com/publicDownload?hash=74cefb0c82fe46c034343bfd8d2e5e3c
+
+Social media link (for sharing):
+https://us-west-00-firestarter.pipenetwork.com/publicDownload?hash=74cefb0c82fe46c034343bfd8d2e5e3c&preview=true
+Use `publicDownload?hash=74cefb0c82fe46c034343bfd8d2e5e3c` to download the file without auth.
