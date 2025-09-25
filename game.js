@@ -38,38 +38,65 @@ class BadgerGame {
         document.addEventListener('keydown', (e) => this.handleKeyDown(e));
         document.addEventListener('keyup', (e) => this.handleKeyUp(e));
 
-        // Mobile touch controls
-        const btnUp = document.getElementById('btn-up');
-        const btnDown = document.getElementById('btn-down');
-        const btnLeft = document.getElementById('btn-left');
-        const btnRight = document.getElementById('btn-right');
-        const btnJump = document.getElementById('btn-jump');
+        // Mobile drag/tap controls
+        let dragActive = false;
+        let dragStart = null;
+        let dragDirection = null;
+        let dragInterval = null;
+        const moveSpeed = 5; // Fixed pace
 
-        if (btnUp && btnDown && btnLeft && btnRight && btnJump) {
-            btnUp.addEventListener('touchstart', (e) => { e.preventDefault(); this.handleMobileMove('up'); });
-            btnDown.addEventListener('touchstart', (e) => { e.preventDefault(); this.handleMobileMove('down'); });
-            btnLeft.addEventListener('touchstart', (e) => { e.preventDefault(); this.handleMobileMove('left'); });
-            btnRight.addEventListener('touchstart', (e) => { e.preventDefault(); this.handleMobileMove('right'); });
-            btnJump.addEventListener('touchstart', (e) => { e.preventDefault(); this.handleMobileJump(); });
-        }
-    }
+        this.gameArea.addEventListener('touchstart', (e) => {
+            if (!this.gameState.isRunning) return;
+            if (e.touches.length === 1) {
+                dragActive = true;
+                dragStart = {
+                    x: e.touches[0].clientX,
+                    y: e.touches[0].clientY
+                };
+                dragDirection = null;
+                // Start moving at fixed pace
+                dragInterval = setInterval(() => {
+                    if (dragDirection) {
+                        let { x, y } = this.gameState.badgerPos;
+                        x += moveSpeed * dragDirection.x;
+                        y += moveSpeed * dragDirection.y;
+                        // Clamp to bounds
+                        x = Math.max(0, Math.min(this.gameArea.clientWidth - 50, x));
+                        y = Math.max(0, Math.min(this.gameArea.clientHeight - 50, y));
+                        this.gameState.badgerPos = { x, y };
+                        this.updatePositions();
+                    }
+                }, 1000/30); // 30 FPS
+            }
+        });
 
-    handleMobileMove(direction) {
-        if (!this.gameState.isRunning) return;
-        const speed = 20; // Faster for touch
-        let { x, y } = this.gameState.badgerPos;
-        if (direction === 'up') y = Math.max(0, y - speed);
-        if (direction === 'down') y = Math.min(this.gameArea.clientHeight - 50, y + speed);
-        if (direction === 'left') x = Math.max(0, x - speed);
-        if (direction === 'right') x = Math.min(this.gameArea.clientWidth - 50, x + speed);
-        this.gameState.badgerPos = { x, y };
-        this.updatePositions();
-    }
+        this.gameArea.addEventListener('touchmove', (e) => {
+            if (!dragActive || !this.gameState.isRunning) return;
+            const touch = e.touches[0];
+            const dx = touch.clientX - dragStart.x;
+            const dy = touch.clientY - dragStart.y;
+            // Normalize direction
+            const mag = Math.sqrt(dx*dx + dy*dy);
+            if (mag > 10) {
+                dragDirection = { x: dx/mag, y: dy/mag };
+            } else {
+                dragDirection = null;
+            }
+        });
 
-    handleMobileJump() {
-        if (!this.gameState.isRunning) return;
-        this.jump();
-        this.checkHit();
+        this.gameArea.addEventListener('touchend', (e) => {
+            dragActive = false;
+            dragDirection = null;
+            if (dragInterval) clearInterval(dragInterval);
+        });
+
+        // Tap to jump/attack
+        this.gameArea.addEventListener('touchend', (e) => {
+            if (!dragActive && this.gameState.isRunning) {
+                this.jump();
+                this.checkHit();
+            }
+        });
     }
     
     handleKeyDown(e) {
