@@ -33,10 +33,43 @@ class BadgerGame {
         // Button events
         this.startBtn.addEventListener('click', () => this.startGame());
         this.resetBtn.addEventListener('click', () => this.resetGame());
-        
+
         // Keyboard events
         document.addEventListener('keydown', (e) => this.handleKeyDown(e));
         document.addEventListener('keyup', (e) => this.handleKeyUp(e));
+
+        // Mobile touch controls
+        const btnUp = document.getElementById('btn-up');
+        const btnDown = document.getElementById('btn-down');
+        const btnLeft = document.getElementById('btn-left');
+        const btnRight = document.getElementById('btn-right');
+        const btnJump = document.getElementById('btn-jump');
+
+        if (btnUp && btnDown && btnLeft && btnRight && btnJump) {
+            btnUp.addEventListener('touchstart', (e) => { e.preventDefault(); this.handleMobileMove('up'); });
+            btnDown.addEventListener('touchstart', (e) => { e.preventDefault(); this.handleMobileMove('down'); });
+            btnLeft.addEventListener('touchstart', (e) => { e.preventDefault(); this.handleMobileMove('left'); });
+            btnRight.addEventListener('touchstart', (e) => { e.preventDefault(); this.handleMobileMove('right'); });
+            btnJump.addEventListener('touchstart', (e) => { e.preventDefault(); this.handleMobileJump(); });
+        }
+    }
+
+    handleMobileMove(direction) {
+        if (!this.gameState.isRunning) return;
+        const speed = 20; // Faster for touch
+        let { x, y } = this.gameState.badgerPos;
+        if (direction === 'up') y = Math.max(0, y - speed);
+        if (direction === 'down') y = Math.min(this.gameArea.clientHeight - 50, y + speed);
+        if (direction === 'left') x = Math.max(0, x - speed);
+        if (direction === 'right') x = Math.min(this.gameArea.clientWidth - 50, x + speed);
+        this.gameState.badgerPos = { x, y };
+        this.updatePositions();
+    }
+
+    handleMobileJump() {
+        if (!this.gameState.isRunning) return;
+        this.jump();
+        this.checkHit();
     }
     
     handleKeyDown(e) {
